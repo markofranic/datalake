@@ -24,7 +24,7 @@ for i in cryptolist:
 start_epoch=int(datetime.datetime(2020, 1, 1).timestamp())
 for i in subreddits:
     listofposts = list()
-    query = list(api.search_submissions(after=2020-01-01,
+    query = list(api.search_submissions(after=start_epoch,
                             subreddit= str(i), filter=['author', 'domain','over_18','selftext','title','subreddit']))
     for element in query:
         listofposts.append(element.d_)
