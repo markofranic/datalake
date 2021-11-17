@@ -40,7 +40,7 @@ for i in cryptolist:
             if i == 'over_18' or 'created_utc':
                 dftest[str(i)] = dftest[str(i)] .apply(lambda x :str(x))
             elif i == 'selftext' or 'title':
-                dftest[str(i)] = dftest[str(i)] .apply(lambda x :x.replace("'", "''") if type(x) == str else x)
+                dftest[str(i)] = dftest[str(i)] .apply(lambda x :x.replace("'", "") if type(x) == str else x)
             else:
                 pass
     dftest = dftest.replace(np.nan, '', regex=True)
