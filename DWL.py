@@ -12,7 +12,7 @@ cryptocurrencies = (cur.fetchall())
 cur.close()
 conn.close()
 tempcryptolist = list()
-for i in cryptocurrencies
+for i in cryptocurrencies:
     tempcryptolist.append(str(i))
 cryptolist=list()
 removers = ["(", ")",",","'"]
