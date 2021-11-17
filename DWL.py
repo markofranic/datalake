@@ -12,7 +12,7 @@ cryptocurrencies = (cur.fetchall())
 cur.close()
 conn.close()
 tempcryptolist = list()
-for i in cryptocurrencies:
+for i in cryptocurrenciesa
     tempcryptolist.append(str(i))
 cryptolist=list()
 removers = ["(", ")",",","'"]
@@ -37,9 +37,9 @@ for i in cryptolist:
         dftest=pd.DataFrame(listofposts)
         for i in list(dftest):
 
-            if i == 'over_18' or 'created_utc':
+            if i == 'over_18' or i == 'created_utc':
                 dftest[str(i)] = dftest[str(i)] .apply(lambda x :str(x))
-            elif i == 'selftext' or 'title':
+            elif i == 'selftext' or i == 'title':
                 dftest[str(i)] = dftest[str(i)] .apply(lambda x :x.replace("'", "") if type(x) == str else x)
             else:
                 pass
@@ -47,6 +47,7 @@ for i in cryptolist:
     dftest = dftest.drop('created',axis=1)
     for i in range(dftest.shape[0]):
         sqlstring = "INSERT INTO redditposts VALUES ('" +"', '".join( dftest.iloc[i,:])+ "')"
+        print(sqlstring)
         cur.execute(sqlstring)
     cur.close()
     conn.close()
