@@ -47,7 +47,6 @@ for i in cryptolist:
     dftest = dftest.drop('created',axis=1)
     for i in range(dftest.shape[0]):
         sqlstring = "INSERT INTO redditposts VALUES ('" +"', '".join( dftest.iloc[i,:])+ "')"
-        print(sqlstring)
         cur.execute(sqlstring)
     cur.close()
     conn.close()
