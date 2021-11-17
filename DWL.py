@@ -9,6 +9,8 @@ cur = conn.cursor()
 cur.execute("CREATE TABLE redditposts (author VARCHAR,created_utc VARCHAR, domain VARCHAR,over_18 VARCHAR,selftext VARCHAR,title VARCHAR,subreddit VARCHAR);")
 cur.execute("SELECT DISTINCT name FROM crypto")
 cryptocurrencies = (cur.fetchall())
+cur.close()
+conn.close()
 tempcryptolist = list()
 for i in cryptocurrencies:
     tempcryptolist.append(str(i))
@@ -24,6 +26,8 @@ for i in cryptolist:
     subreddits.append(i)
 start_epoch=int(datetime.datetime(2020, 1, 1).timestamp())
 for i in subreddits:
+    conn.set_session(autocommit=True)
+    cur = conn.cursor()
     listofposts = list()
     query = list(api.search_submissions(after=start_epoch,
                             subreddit= str(i), filter=['author', 'domain','over_18','selftext','title','subreddit']))
@@ -43,3 +47,5 @@ for i in subreddits:
     for i in range(dftest.shape[0]):
         sqlstring = "INSERT INTO redditposts VALUES ('" +"', '".join( dftest.iloc[i,:])+ "')"
         cur.execute(sqlstring)
+    cur.close()
+    conn.close()
