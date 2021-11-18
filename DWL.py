@@ -123,7 +123,7 @@ for time in timelist:
         conn.set_session(autocommit=True)
         cur = conn.cursor()
         listofposts = list()
-        query = list(api.search_submissions(after=time[0], before=time[1]
+        query = list(api.search_submissions(after=time[0], before=time[1],
                                 subreddit= str(i), filter=['author', 'domain','over_18','selftext','title','subreddit']))
         for element in query:
             listofposts.append(element.d_)
