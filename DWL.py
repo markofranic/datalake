@@ -34,17 +34,19 @@ for i in cryptolist:
                             subreddit= str(i), filter=['author', 'domain','over_18','selftext','title','subreddit']))
     for element in query:
         listofposts.append(element.d_)
-        dftest=pd.DataFrame(listofposts)
-        for i in list(dftest):
+    dftest=pd.DataFrame(listofposts)
+    for i in list(dftest):
 
-            if i == 'over_18' or i == 'created_utc':
-                dftest[str(i)] = dftest[str(i)] .apply(lambda x :str(x))
-            elif i == 'selftext' or i == 'title':
-                dftest[str(i)] = dftest[str(i)] .apply(lambda x :x.replace("'", "") if type(x) == str else x)
-            else:
-                pass
+        if i == 'over_18' or i == 'created_utc' or i == 'author':
+            dftest[str(i)] = dftest[str(i)] .apply(lambda x :str(x))
+        elif i == 'selftext' or i == 'title':
+            dftest[str(i)] = dftest[str(i)] .apply(lambda x :x.replace("'", "") if type(x) == str else x)
+        else:
+            pass
     dftest = dftest.replace(np.nan, '', regex=True)
-    dftest = dftest.drop('created',axis=1)
+    for i in list(dftest):
+        if i == 'created':
+            dftest = dftest.drop('created',axis=1)
     for i in range(dftest.shape[0]):
         sqlstring = "INSERT INTO redditposts VALUES ('" +"', '".join( dftest.iloc[i,:])+ "')"
         cur.execute(sqlstring)
