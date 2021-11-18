@@ -24,7 +24,7 @@ api = PushshiftAPI()
 subreddits = ['CryptoCurrency','CryptoMarkets','CryptoCurrencyTrading','CryptoCurrencies']
 for i in subreddits:
     cryptolist.append(i)
-start_epoch=int(datetime.datetime(2020, 1, 1).timestamp())
+start_epoch=int(datetime.datetime(2021, 1, 1).timestamp())
 for i in cryptolist:
     conn = psycopg2.connect("host=datalake.cxcqywp4y4sf.us-east-1.rds.amazonaws.com dbname=datalake1 user=postgres password=postgres123")
     conn.set_session(autocommit=True)
