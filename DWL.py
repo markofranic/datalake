@@ -25,105 +25,15 @@ subreddits = ['CryptoCurrency','CryptoMarkets','CryptoCurrencyTrading','CryptoCu
 for i in subreddits:
     cryptolist.append(i)
 timelist = list()
-start_epoch=int(datetime.datetime(2020, 1, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 2, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 2, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 3, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 3, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 4, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 4, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 5, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 5, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 6, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 6, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 7, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 7, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 8, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 8, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 9, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 9, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 10, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 10, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 11, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 11, 1).timestamp())
-end_epoch=int(datetime.datetime(2020, 12, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2020, 12, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 1, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 1, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 2, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 2, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 3, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 3, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 4, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 4, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 5, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 5, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 6, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 6, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 7, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 7, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 8, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 8, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 9, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 9, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 10, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 10, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 11, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-start_epoch=int(datetime.datetime(2021, 11, 1).timestamp())
-end_epoch=int(datetime.datetime(2021, 12, 1).timestamp())
-times = [start_epoch,end_epoch]
-timelist.append(times)
-for time in timelist:
+start_epoch=int(datetime.datetime(2019, 12, 31).timestamp())
+for i in range (702):
+start_epoch+=86400
     for i in cryptolist:
         conn = psycopg2.connect("host=datalake.cxcqywp4y4sf.us-east-1.rds.amazonaws.com dbname=datalake1 user=postgres password=postgres123")
         conn.set_session(autocommit=True)
         cur = conn.cursor()
         listofposts = list()
-        query = list(api.search_submissions(after=time[0], before=time[1],
+        query = list(api.search_submissions(after=start_epoch, before=start_epoch + 86400,
                                 subreddit= str(i), filter=['author', 'domain','over_18','selftext','title','subreddit']))
         for element in query:
             listofposts.append(element.d_)
