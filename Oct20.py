@@ -6,7 +6,6 @@ import psycopg2
 conn = psycopg2.connect("host=datalake.cxcqywp4y4sf.us-east-1.rds.amazonaws.com dbname=datalake1 user=postgres password=postgres123")
 conn.set_session(autocommit=True)
 cur = conn.cursor()
-cur.execute("CREATE TABLE redditposts (author VARCHAR,created_utc VARCHAR, domain VARCHAR,over_18 VARCHAR,selftext VARCHAR,title VARCHAR,subreddit VARCHAR);")
 cur.execute("SELECT DISTINCT name FROM crypto")
 cryptocurrencies = (cur.fetchall())
 cur.close()
